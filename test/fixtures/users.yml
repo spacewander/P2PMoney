@@ -2,18 +2,18 @@
 
 one:
   username: MyString
-  password: MyString
-  telephone: MyString
-  email: MyString
-  real_name: MyString
-  id_card_num: MyString
+  telephone: '123'
+  email: 123@gmail.com
+  real_name: 桃太郎
+  id_card_num: 440107
+  password_hash: <%= BCrypt::Password.create("123") %>
   balance: 
 
 two:
-  username: MyString
-  password: MyString
-  telephone: MyString
-  email: MyString
-  real_name: MyString
-  id_card_num: MyString
+  username: YourString
+  telephone: 456
+  email: ga@scut.edu.cn
+  real_name: Loli
+  id_card_num: 440105
+  password_hash: <%= BCrypt::Password.create("a") %>
   balance: 

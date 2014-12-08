@@ -14,8 +14,19 @@
  *= require_self
  *= require rails_bootstrap_forms
  */
+$P2P-blue:#5d68be;
+$P2P-orange:#ff8401;
+$btn-default-color:white;
+$btn-default-bg:$P2P-orange;
+$btn-primary-color:white;
+$btn-primary-bg:$P2P-blue;
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+body {
+  background-color: rgba(242, 242, 242, 1);
+}
 
 li {
   list-style: none;
@@ -36,11 +47,12 @@ a:hover {
 .nav_button {
   height: 50px;
   font-size: 2em;
-  background-color: #5d68be;
+  background-color: $P2P-blue;
   border: white solid 1px;
   text-align: center;
   
   & > a {
     color: white;
+    vertical-align: middle;
   }
 }

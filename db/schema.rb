@@ -45,13 +45,13 @@ ActiveRecord::Schema.define(version: 20141208023342) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "username",                                           null: false
-    t.string   "password",                                           null: false
-    t.string   "telephone",                                          null: false
-    t.string   "email",                                              null: false
-    t.string   "real_name",                                          null: false
-    t.string   "id_card_num",                                        null: false
-    t.decimal  "balance",     precision: 12, scale: 2, default: 0.0
+    t.string   "username",                                             null: false
+    t.string   "password_hash",                                        null: false
+    t.string   "telephone",                                            null: false
+    t.string   "email",                                                null: false
+    t.string   "real_name",                                            null: false
+    t.string   "id_card_num",                                          null: false
+    t.decimal  "balance",       precision: 12, scale: 2, default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -15,3 +15,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+var Webpath = function() {
+  // should run this function first
+  return document.getElementsByTagName('body')[0].className.split(" ");
+};
+

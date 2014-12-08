@@ -1,3 +1,32 @@
 // Place all the styles related to the Sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.login-container {
+  height: 100%;
+  width: 100%;
+}
+
+.login {
+  margin: auto;
+  margin-top: 100px;
+  width: 500px;
+  height: 250px;
+  padding: 50px 20px;
+  background-color: white;
+  
+  & input.btn.btn-default {
+    margin-left: 80px;
+  }
+  
+  & .new-user-btn  > a {
+    font-weight: bold;
+    color: white;
+  }
+  
+  & .btn {
+    width: 70px;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+}
+
