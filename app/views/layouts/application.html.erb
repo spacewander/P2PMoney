@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <title>P2PMoney</title>
+  <meta charset="utf-8">
+  <meta name="keywords" content="P2P 金融 借贷">
+  <meta name="description" content="这是一个P2P借贷平台">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= @title or 'P2PMoney' %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= yield :javascript %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
+<%= render_body_tag %>
 <%= yield %>
-
 </body>
 </html>
+
