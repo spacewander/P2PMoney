@@ -68,9 +68,8 @@ Users =
 
   bindTelephoneRegisterChecker: ->
     $('form').submit (event) =>
-      telephone = Number($('#user_telephone').val().trim())
-      if telephone == NaN or
-      telephone == 0 or telephone != Math.floor(telephone)
+      telephone = $('#user_telephone').val().trim()
+      if !telephone.match(/\d+/)
         event.preventDefault()
         @editHelpBlock('user_telephone', '号码不合法！')
 
@@ -85,3 +84,4 @@ Users =
     $('form').submit (event) ->
       if !document.querySelector('#accept').checked
         event.preventDefault()
+

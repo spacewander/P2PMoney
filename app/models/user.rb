@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
     message: "邮箱地址不正确 "} 
   validates :id_card_num, format: { with: /\A4401/,
     message: "身份证号码不正确 " }
-  validates :telephone, :numericality => { message: '电话号码不合法 ' }
+  validates :telephone, format: { with: /\A\d+\z/, message: '电话号码不合法 ' }
 
   def self.authenticate(name, password)
     if @user = find_by_username(name)

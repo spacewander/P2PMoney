@@ -12,7 +12,12 @@
   <%= csrf_meta_tags %>
 </head>
 <%= render_body_tag %>
-<div class="notice"><%= @notice or "" %></div>
+<% if flash[:notice] %>
+  <div class="alert alert-info alert-dismissible notice" role="alert">
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <%= flash[:notice] %>
+  </div>
+<% end %>
 <div class="nav_header">
 <div class="container-fluid">
   <li class="nav_button col-xs-3">
