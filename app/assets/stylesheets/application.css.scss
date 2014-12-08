@@ -12,4 +12,35 @@
  *
  *= require_tree .
  *= require_self
+ *= require rails_bootstrap_forms
  */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+li {
+  list-style: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.container-fluid {
+  padding: 0 !important;
+}
+
+.notice {
+  display: block;
+}
+
+.nav_button {
+  height: 50px;
+  font-size: 2em;
+  background-color: #5d68be;
+  border: white solid 1px;
+  text-align: center;
+  
+  & > a {
+    color: white;
+  }
+}

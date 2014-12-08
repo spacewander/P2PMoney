@@ -12,6 +12,27 @@
   <%= csrf_meta_tags %>
 </head>
 <%= render_body_tag %>
+<div class="notice"><%= @notice or "" %></div>
+<div class="nav_header">
+<div class="container-fluid">
+  <li class="nav_button col-xs-3">
+    <% if @user %>
+    <%= link_to '首页', @user, :class => 'nav-link' %>
+    <% else %>
+    <a href="." class="nav-link">首页</a>
+    <% end %>
+  </li>
+  <li class="nav_button col-xs-3">
+    <%= link_to '我要投资', loans_path, :class => 'nav-link' %>
+  </li>
+  <li class="nav_button col-xs-3">
+    <%= link_to '我要借贷', new_loan_path, :class => 'nav-link' %>
+  </li>
+  <li class="nav_button col-xs-3">
+    <a class="nav-link">帮助中心</a>
+  </li>
+</div>
+</div>
 <%= yield %>
 </body>
 </html>
