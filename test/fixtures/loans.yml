@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  debit_id: 1
+  investor_id: 1
+  amount: 
+  loan_time: 2014-12-08
+  repay_time: 2014-12-08
+  bank_card_num: MyString
+  filing_date: 2014-12-08
+  is_invested: false
+  is_repay: false
+  final_repay_time: 2014-12-08
+
+two:
+  debit_id: 1
+  investor_id: 1
+  amount: 
+  loan_time: 2014-12-08
+  repay_time: 2014-12-08
+  bank_card_num: MyString
+  filing_date: 2014-12-08
+  is_invested: false
+  is_repay: false
+  final_repay_time: 2014-12-08

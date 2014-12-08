@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one_month:
+  interest_rate: 3.00
+  months: 3
+
+half_year:
+  interest_rate: 5.00
+  months: 6
+
+one_year:
+  interest_rate: 8.00
+  months: 12
+
+two_years:
+  interest_rate: 11.00
+  months: 24

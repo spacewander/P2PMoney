@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  debit_id: 1
+  investor_id: 1
+  invest_date: 2014-12-08
+  is_repay: false
+
+two:
+  debit_id: 1
+  investor_id: 1
+  invest_date: 2014-12-08
+  is_repay: false
