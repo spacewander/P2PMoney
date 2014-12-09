@@ -7,6 +7,8 @@ $(document).ready ->
     switch action
       when 'new-action', 'create-action'
         Users.checkRegisterForm()
+      when 'edit-action', 'update-action'
+        Users.checkEditForm()
       when 'show-action'
         Users.checkChargeForm()
       else
@@ -21,6 +23,14 @@ Users =
     @bindTelephoneRegisterChecker()
     @bindIdCardNumRegisterChecker()
     @bindAcceptChecker()
+
+  checkEditForm: ->
+    @bindNullRegisterChecker('user_username')
+    @bindNullRegisterChecker('user_real_name')
+    @bindEmailRegisterChecker()
+    @bindTelephoneRegisterChecker()
+    @bindIdCardNumRegisterChecker()
+
   checkChargeForm: ->
     @bindPasswordChecker()
     @bindBankCardNumChecker()

@@ -1,22 +1,20 @@
 <% @title = "你好， " + @user.username %>
 
-<div class="show-user-container">
-  <div class="show-user">
-    <div class="description-item">
-      <span class="key">用户 </span>
-      <span class="value"><%= @user.username %></span>
-    </div>
-    <div class="description-item">
-      <span class="key">账户余额 </span>
-      <span class="value"><%= @user.balance %></span>
-    </div>
-    <div class="show-user-form">
-      <%= bootstrap_form_tag url: '/users/charge' do |f| %>
-        <%= f.text_field :bank_card_num, label: '银行卡号' %>
-        <%= f.password_field :password, label: '银行卡密码' %>
-        <%= f.number_field :amount, label: '金额', min:0 %>
-        <%= f.submit "充值" %>
-      <% end %>
-    </div>
+<div class="show-user">
+  <div class="description-item">
+    <span class="key">用户 </span>
+    <span class="value"><%= @user.username %></span>
+  </div>
+  <div class="description-item">
+    <span class="key">账户余额 </span>
+    <span class="value"><%= @user.balance %></span>
+  </div>
+  <div class="show-user-form">
+    <%= bootstrap_form_tag url: '/users/charge' do |f| %>
+      <%= f.text_field :bank_card_num, label: '银行卡号' %>
+      <%= f.password_field :password, label: '银行卡密码' %>
+      <%= f.number_field :amount, label: '金额', min:0 %>
+      <%= f.submit "充值" %>
+    <% end %>
   </div>
 </div>

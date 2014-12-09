@@ -33,11 +33,15 @@
       </ul>
     </div>
     <div class="col-md-9 main">
-      <%= yield %>
+      <div class="user-container">
+        <%= yield %>
+      </div>
     </div>
   </div>
 <% else %>
-  <%= yield %>
+  <div class="user-container">
+    <%= yield %>
+  </div>
 <% end %>
 <% end %>
 

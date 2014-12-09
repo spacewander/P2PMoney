@@ -52,7 +52,6 @@ class UsersController < ApplicationController
       if @user.save
         # 注册后先登录再说
         format.html { redirect_to login_url}
-        format.json { render :show, status: :created, location: @user }
       else
         puts @user.errors.full_messages
         format.html { render :new }
@@ -62,6 +61,17 @@ class UsersController < ApplicationController
   end
 
   def update
+    update_params = user_params
+    update_params.delete_if {|key, value| value == ""}
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to action: 'edit', :id => @user.to_param}
+      else
+        puts @user.errors.full_messages
+        format.html { render :edit }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private

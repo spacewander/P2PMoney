@@ -92,7 +92,7 @@ $item-blue:#00ccff;
 }
 
 // users#show
-.show-user-container {
+.user-container {
     height: 600px;
     background-color: white;
     padding: 60px 0;
@@ -101,7 +101,9 @@ $item-blue:#00ccff;
 }
 
 .show-user {
-    margin: 0px 20%;
+    margin-top: 5px;
+    margin-left: 20%;
+    margin-right: 20%;
 
     & > .description-item {
         font-weight: bold;
@@ -128,5 +130,23 @@ $item-blue:#00ccff;
         width: 30%;
         font-size: 20px;
         font-weight: 700;
+    }
+}
+
+// users#edit
+.edit-user {
+    margin-top: -15px;
+    margin-left: 15%;
+    margin-right: 5%;
+}
+
+.edit-user-form {
+    margin-top: 20px;
+    
+    & input[type=submit] {
+        width: 30%;
+        font-size: 20px;
+        font-weight: 700;
+        margin-left: 17%;
     }
 }
