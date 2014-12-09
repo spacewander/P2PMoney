@@ -1,0 +1,8 @@
+<%= bootstrap_form_for(@user) do |f| %>
+  <div class="field">
+    <%= f.text_field :username, :size => 30, :label => '用户名' %>
+  </div>
+  <div class="actions">
+    <%= f.submit '保存修改' %>
+  </div>
+<% end %>

@@ -62,5 +62,11 @@ Rails.application.routes.draw do
   end
   resources :loans
   resources :investment
-  resources :users
+  resources :users do
+    collection do
+      get 'invest' => :invest
+      get 'debt' => :debt
+    end
+  end
+
 end

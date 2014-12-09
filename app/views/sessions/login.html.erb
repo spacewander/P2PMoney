@@ -1,5 +1,6 @@
 <% @title = '欢迎使用P2P借贷平台 - 登录' %>
 
+<% content_for(:main) do %>
 <div class="login-container">
   <div class="login">
     <div class="login-form">
@@ -7,11 +8,12 @@
         <%= f.text_field :name, label: '用户名' %>
         <%= f.password_field :password, label: '密码' %>
         <%= f.submit "登录" %>
-        <button class="btn btn-primary new-user-btn">
+        <div class="btn btn-primary new-user-btn">
           <a href="/users/new">注册</a>
-        </button>
+        </div>
       <% end %>
     </div>
   </div>
 </div>
+<% end %>
 

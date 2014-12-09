@@ -11,4 +11,8 @@ class ApplicationController < ActionController::Base
     session[:id] = id
   end
 
+  def not_found
+    return redirect_to :status => 404
+  end
+
 end

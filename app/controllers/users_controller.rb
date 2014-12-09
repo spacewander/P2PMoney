@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
 
+  before_action :set_user_with_params, only: [:show, :edit, :update]
+  layout 'users'
+
   def show
     render
   end
@@ -9,6 +12,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    render
   end
 
   def create
@@ -36,6 +40,15 @@ class UsersController < ApplicationController
     params.require(:user).permit(:id, :username, :telephone, :real_name,
                                   :password, :password_confirmation, :email,
                                 :id_card_num)
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user_with_params
+    begin
+      @user = User.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      return not_found()
+    end
   end
 
 end

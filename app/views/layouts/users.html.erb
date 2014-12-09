@@ -1,0 +1,45 @@
+<% @title = "欢迎使用P2P借贷平台" %>
+
+<% content_for(:main) do %>
+<% if session[:id] %>
+  <div class="container-fluid">
+    <div class="col-md-3 sidebar">
+      <ul class="node" id="first-node">
+        <li class="node-name">我的账户</li>
+        <li class="item">
+          <%= link_to '个人信息', edit_user_path, :class => 'none' %>
+        </li>
+        <li class="item">
+          <%= link_to '账户余额', @user, :class => 'none' %>
+        </li>
+      </ul>
+      <ul class="node">
+        <li class="node-name">我的投资</li>
+        <li class="item">
+          <%= link_to '我要投资', loans_path, :class => 'none' %>
+        </li>
+        <li class="item">
+          <%= link_to '已投资项目', {:controller => 'users', :action => 'invest'}, class: 'none' %>
+        </li>
+      </ul>
+      <ul class="node">
+        <li class="node-name">我的借款</li>
+        <li class="item">
+          <%= link_to '我要借款', new_loan_path, :class => 'none' %>
+        </li>
+        <li class="item">
+          <%= link_to '借款信息', {:controller => 'users', :action => 'debt'}, class: 'none' %>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-9 main">
+      <%= yield %>
+    </div>
+  </div>
+<% else %>
+  <%= yield %>
+<% end %>
+<% end %>
+
+<%= render template: "layouts/application" %>
+
