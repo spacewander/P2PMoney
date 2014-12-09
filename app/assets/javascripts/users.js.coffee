@@ -6,14 +6,14 @@ $(document).ready ->
   if controller == "users-controller"
     switch action
       when 'new-action', 'create-action'
-        Users.checkForm()
+        Users.checkRegisterForm()
       when 'show-action'
-        
+        Users.checkChargeForm()
       else
       # do nothing
     
 Users =
-  checkForm: ->
+  checkRegisterForm: ->
     @bindNullRegisterChecker('user_username')
     @bindNullRegisterChecker('user_real_name')
     @bindPasswordRegisterChecker()
@@ -21,6 +21,10 @@ Users =
     @bindTelephoneRegisterChecker()
     @bindIdCardNumRegisterChecker()
     @bindAcceptChecker()
+  checkChargeForm: ->
+    @bindPasswordChecker()
+    @bindBankCardNumChecker()
+    @bindAmoutChecher()
 
   editHelpBlock: (labelName, msg) ->
     return if labelName == ''
@@ -28,9 +32,12 @@ Users =
     if $("##{labelName} ~ .help-block").length
       $('span.help-block').text(msg)
     else
-      $("##{labelName}")?.parent().parent().addClass('has-error')
-      .find("input")
-      .after("""
+      if $("##{labelName}")?.parent().hasClass('form-group')
+        $("##{labelName}")?.parent().addClass('has-error')
+      else
+        $("##{labelName}")?.parent().parent().addClass('has-error')
+
+      $("##{labelName}").after("""
         <span class="help-block">#{msg}</span>
         """)
 
@@ -84,4 +91,25 @@ Users =
     $('form').submit (event) ->
       if !document.querySelector('#accept').checked
         event.preventDefault()
+
+  bindPasswordChecker: ->
+    $('form').submit (event) =>
+      password = $("#password").val().trim()
+      if password == ''
+        event.preventDefault()
+        @editHelpBlock('password', '密码不能为空！')
+
+  bindBankCardNumChecker: ->
+    $('form').submit (event) =>
+      bank_card_num = $("#bank_card_num").val().trim()
+      if !(bank_card_num.match /^\d+$/)
+        event.preventDefault()
+        @editHelpBlock('bank_card_num', '银行卡号码不对')
+
+  bindAmoutChecher: ->
+    $('form').submit (event) =>
+      amount = $("#amount").val().trim()
+      if amount == '' or amount == '0'
+        event.preventDefault()
+        @editHelpBlock('amount', '金额不对')
 

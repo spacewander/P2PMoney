@@ -1,10 +1,40 @@
 class UsersController < ApplicationController
 
   before_action :set_user_with_params, only: [:show, :edit, :update]
+  before_action :set_user_with_session, only: [:charge]
+
   layout 'users'
 
   def show
     render
+  end
+
+  def charge
+    bank_card_num = params[:bank_card_num]
+    if bank_card_num || bank_card_num.strip == '' || 
+      !(/\A\d+\z/.match bank_card_num )
+      @error = "银行卡号码不对"
+    elsif params[:password] || params[:password].strip == ''
+      @error = "密码不对"
+    elsif params[:amount] || params[:amount].to_i <= 0
+      @error = "金额不对"
+    end
+
+    respond_to do |format|
+      if @error
+        format.html { redirect_to @user, :notice => @error }
+        format.json { render :json => { 'error' => @error}, 
+                      status: :unprocessable_entity}
+      else
+        @user.balance += params[:amount].to_i
+        if @user.save
+          format.html {redirect_to @user }
+        else
+          format.html { redirect_to @user, :notice => @error }
+        end
+      end
+    end
+
   end
 
   def new
@@ -46,6 +76,14 @@ class UsersController < ApplicationController
   def set_user_with_params
     begin
       @user = User.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      return not_found()
+    end
+  end
+
+  def set_user_with_session
+    begin
+      @user = User.find(get_session_id)
     rescue ActiveRecord::RecordNotFound
       return not_found()
     end

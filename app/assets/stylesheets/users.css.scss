@@ -1,6 +1,10 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$P2P-blue:#5d68be;
+$P2P-orange:#ff8401;
+
+// users#new
 .new-user-container {
     background-color: white;
     margin: 0 0;
@@ -22,6 +26,7 @@
     }
 }
 
+// users#sidebar
 $item-sky-blue:#99ffcc;
 $item-blue:#00ccff;
 
@@ -83,5 +88,45 @@ $item-blue:#00ccff;
             color: rgb(0, 102, 255);
             opacity: 1;
         }
+    }
+}
+
+// users#show
+.show-user-container {
+    height: 600px;
+    background-color: white;
+    padding: 60px 0;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.show-user {
+    margin: 0px 20%;
+
+    & > .description-item {
+        font-weight: bold;
+        margin-bottom: 10px;
+        position: relative;
+
+        & > .key {
+            color: $P2P-blue;
+            margin-right: 20px;
+        }
+
+        & > .value {
+            color: $P2P-orange;
+            position: absolute;
+            left: 250px;
+        }
+    }
+}
+
+.show-user-form {
+    margin-top: 20px;
+
+    & input[type=submit] {
+        width: 30%;
+        font-size: 20px;
+        font-weight: 700;
     }
 }

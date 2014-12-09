@@ -64,6 +64,7 @@ Rails.application.routes.draw do
   resources :investment
   resources :users do
     collection do
+      post 'charge' => :charge
       get 'invest' => :invest
       get 'debt' => :debt
     end

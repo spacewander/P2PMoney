@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def get_session_id
-    session[:id]
+    session[:id].to_i
   end
 
   def set_session_id(id)

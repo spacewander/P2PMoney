@@ -1,7 +1,7 @@
 <% @title = "欢迎使用P2P借贷平台" %>
 
 <% content_for(:main) do %>
-<% if session[:id] %>
+<% if session[:id] && session[:id] == @user.id %>
   <div class="container-fluid">
     <div class="col-md-3 sidebar">
       <ul class="node" id="first-node">
