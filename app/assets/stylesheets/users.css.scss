@@ -36,11 +36,11 @@ $item-blue:#00ccff;
 
     $node-interval: 52px;
 
-    #first-node {
-        & > .item {
-            display: block;
-        }
-    }
+    /*#first-node {*/
+        /*& > .item {*/
+            /*display: block;*/
+        /*}*/
+    /*}*/
 
     &  > .node {
         margin-left: 0;

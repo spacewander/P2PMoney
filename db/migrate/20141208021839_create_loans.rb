@@ -1,8 +1,8 @@
 class CreateLoans < ActiveRecord::Migration
   def change
     create_table :loans do |t|
-      t.integer :debit_id, null: false
-      t.integer :investor_id, null: false
+      t.integer :user_id, null: false
+      t.integer :investment_id
       t.decimal :amount, precision: 12, scale: 2
       t.date :loan_time, null: false
       t.date :repay_time, null: false

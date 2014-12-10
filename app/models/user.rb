@@ -2,6 +2,9 @@ require 'bcrypt'
 
 class User < ActiveRecord::Base
 
+  has_many :investments
+  has_many :loans
+
   # users.password_hash in the database is a :string
   include BCrypt
 

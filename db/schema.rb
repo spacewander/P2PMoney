@@ -14,8 +14,8 @@
 ActiveRecord::Schema.define(version: 20141208023342) do
 
   create_table "investments", force: true do |t|
-    t.integer  "debit_id",    null: false
-    t.integer  "investor_id", null: false
+    t.integer  "user_id",     null: false
+    t.integer  "loan_id"
     t.date     "invest_date", null: false
     t.boolean  "is_repay",    null: false
     t.datetime "created_at"
@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 20141208023342) do
   end
 
   create_table "loans", force: true do |t|
-    t.integer  "debit_id",                                  null: false
-    t.integer  "investor_id",                               null: false
+    t.integer  "user_id",                                   null: false
+    t.integer  "investment_id"
     t.decimal  "amount",           precision: 12, scale: 2
     t.date     "loan_time",                                 null: false
     t.date     "repay_time",                                null: false
