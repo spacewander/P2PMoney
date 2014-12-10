@@ -2,7 +2,7 @@
 
 <div class="user-debt">
   <h2>我的借款</h2>
-  <% if @loans %>
+  <% if @loans && @loans.length != 0 %>
   <div class="table-responsive" id="user-debt-panel">
     <table id="user-debt-table" class="table table-hover table-condensed table-striped">
       <thead id="user-debt-thead">

@@ -1,0 +1,45 @@
+<% content_for(:main) do %>
+<div class="show-loan-container">
+<div class="show-loan">
+  <div class="container-fluid">
+  <div class="row">
+    <div class="description-item row col-sm-6">
+      <span class="key col-sm-6">借方</span>
+      <span class="value col-sm-6"><%= @user.username %></span>
+    </div>
+    <div class="description-item row col-sm-6">
+      <span class="key col-sm-6">贷方</span>
+      <span class="value col-sm-6"><%= @user.username %></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="description-item row col-sm-6">
+      <span class="key col-sm-6">借款时间</span>
+      <span class="value col-sm-6"><%= @loan.loan_time %></span>
+    </div>
+    <div class="description-item row col-sm-6">
+      <span class="key col-sm-6">还款时间</span>
+      <span class="value col-sm-6"><%= @loan.repay_time %></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="description-item row col-sm-6">
+      <span class="key col-sm-6">金额</span>
+      <span class="value col-sm-6"><%= @loan.amount %></span>
+    </div>
+    <div class="description-item row col-sm-6">
+      <span class="key col-sm-6">利率</span>
+      <span class="value col-sm-6"><%= @loan.rate %></span>
+    </div>
+  </div>
+  </div>
+  <div class="show-loan-form">
+    <%= bootstrap_form_tag url: "/loans/#{@loan.id}", layout: :horizontal do |f| %>
+      <%= f.text_field :bank_card_num, label: '银行卡号' %>
+      <%= f.password_field :password, label: '银行卡密码' %>
+      <%= f.submit "还款" %>
+    <% end %>
+  </div>
+</div>
+</div>
+<% end %>

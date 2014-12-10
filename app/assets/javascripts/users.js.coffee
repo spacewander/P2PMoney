@@ -19,8 +19,11 @@ ready = ->
       # do nothing
   # 为了追求复用，loans也用这个表单检查函数
   else if controller == "loans-controller"
-    if action == 'new-action'
-      FormHelper.checkLoanForm()
+    switch action
+      when 'new-action', 'create-action'
+        FormHelper.checkLoanForm()
+      when 'show-action', 'repay-action'
+        FormHelper.checkRepayForm()
     
 
 $(document).ready(ready)
@@ -79,6 +82,10 @@ FormHelper =
     @bindNullRegisterChecker('loan_repay_time')
     @bindLoanBankCardNumChecker()
     @bindLoanAmountChecker()
+
+  checkRepayForm: ->
+    @bindNullRegisterChecker('password')
+    @bindBankCardNumChecker()
 
   editHelpBlock: (labelName, msg) ->
     return if labelName == ''

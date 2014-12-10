@@ -3,6 +3,15 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  rescue_from CanCan::AccessDenied do |exception|
+    @error_message = exception.message
+    respond_to do |format|
+      format.json { render json: {:msg => "unauthentication"}, 
+                    status: :forbidden}
+      format.html { redirect_to login_path }
+    end
+  end
+
   def has_session_id
     session[:id] != nil
   end
