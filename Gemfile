@@ -46,3 +46,6 @@ gem 'bootstrap_form'
 
 # for authorization
 gem 'cancancan'
+
+# for date validates
+gem 'date_validator', '~> 0.7.1'
