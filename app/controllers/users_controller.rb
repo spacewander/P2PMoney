@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   before_action :set_user_with_params, only: [:show, :edit, :update]
   before_action :set_user_with_session, only: [:charge]
+  before_filter :is_hoster, only: [:edit, :show, :update]
 
   layout 'users'
 
@@ -11,12 +12,12 @@ class UsersController < ApplicationController
 
   def charge
     bank_card_num = params[:bank_card_num]
-    if bank_card_num || bank_card_num.strip == '' || 
+    if !bank_card_num || bank_card_num.strip == '' || 
       !(/\A\d+\z/.match bank_card_num )
       @error = "银行卡号码不对"
-    elsif params[:password] || params[:password].strip == ''
+    elsif !params[:password] || params[:password].strip == ''
       @error = "密码不对"
-    elsif params[:amount] || params[:amount].to_i <= 0
+    elsif !params[:amount] || params[:amount].to_i <= 0
       @error = "金额不对"
     end
 
@@ -76,6 +77,14 @@ class UsersController < ApplicationController
 
   private
   
+  # 对于url中含有user id的action，检查url中的id是否跟session中的一致，
+  # 不需要检查url中不含有id的action
+  # 只有是页面主人才能提交修改
+  def is_hoster
+    return forbidden unless has_session_id
+    return go_back_home(get_session_id) if get_session_id != params[:id].to_i
+  end
+
   def user_params
     params.require(:user).permit(:id, :username, :telephone, :real_name,
                                   :password, :password_confirmation, :email,

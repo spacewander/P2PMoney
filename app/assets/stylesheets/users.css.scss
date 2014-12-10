@@ -143,7 +143,7 @@ $item-blue:#00ccff;
 .edit-user-form {
     margin-top: 20px;
     
-    & input[type=submit] {
+    & input[name=commit] {
         width: 30%;
         font-size: 20px;
         font-weight: 700;

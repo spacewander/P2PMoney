@@ -8,6 +8,8 @@ $(document).ready ->
       when 'new-action', 'create-action'
         Users.checkRegisterForm()
       when 'edit-action', 'update-action'
+        Users.lockInput()
+        Users.bindUnlockAction()
         Users.checkEditForm()
       when 'show-action'
         Users.checkChargeForm()
@@ -20,6 +22,30 @@ $(document).ready ->
     
     
 Users =
+  lockInput: ->
+    inputs = document.getElementsByTagName('input')
+    for e in inputs
+      if e.type in ['text', 'date', 'number', 'password', 'email']
+        if e.readOnly = true
+          e.data_readOnly = true
+        e.readOnly = true
+
+    $('input[type=submit]').hide()
+
+  bindUnlockAction: ->
+    $('#user-edit-btn').click =>
+      @unlockInput()
+
+  unlockInput: ->
+    inputs = document.getElementsByTagName('input')
+    for e in inputs
+      if e.type in ['text', 'date', 'number', 'password', 'email']
+        if e.readOnly = true and e.data_readOnly != true
+          e.readOnly = false
+
+    $('#user-edit-btn').hide()
+    $('input[type=submit]').show()
+
   checkRegisterForm: ->
     @bindNullRegisterChecker('user_username')
     @bindNullRegisterChecker('user_real_name')

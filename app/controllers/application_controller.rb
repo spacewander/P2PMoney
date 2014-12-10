@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  def has_session_id
+    session[:id] != nil
+  end
+
   def get_session_id
     session[:id].to_i if session[:id]
   end
@@ -22,4 +26,9 @@ class ApplicationController < ActionController::Base
       format.html { redirect_to login_path }
     end
   end
+
+  def go_back_home(id)
+    return redirect_to user_path(id)
+  end
+
 end
