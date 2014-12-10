@@ -23,6 +23,10 @@ class LoansController < ApplicationController
     end
   end
 
+  def show
+    render
+  end
+
   private
 
   def has_login

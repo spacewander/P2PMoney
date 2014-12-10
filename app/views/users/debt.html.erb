@@ -1,0 +1,51 @@
+<% @title = 'clockOut - 借款信息' %>
+
+<div class="user-debt">
+  <h2>我的借款</h2>
+  <% if @loans %>
+  <div class="table-responsive" id="user-debt-panel">
+    <table id="user-debt-table" class="table table-hover table-condensed table-striped">
+      <thead id="user-debt-thead">
+        <tr>
+          <th class="th-debt-amount">借款金额</th>
+          <th class="th-debt-loan-time">借款时间</th>
+          <th class="th-debt-repay-time">还款时间</th>
+          <th class="th-debt-rate">利率</th>
+          <th class="th-debt-bank-card-num">银行卡号</th>
+          <th class="th-debt-filing-date">发布日期</th>
+          <th class="th-debt-inves">投资人</th>
+          <th colspan="1"></th>
+        </tr>
+      </thead>
+      <tbody id="user-debt-tbody">
+        <% @loans.each do |loan| %>
+        <tr>
+          <td class="td-debt-amount">
+            <%= loan.amount %>
+          </td>
+          <td class="td-debt-loan-time">
+            <%= chinese_date_format loan.loan_time %>
+          </td>
+          <td class="td-debt-repay-time">
+            <%= chinese_date_format loan.repay_time %>
+          </td>
+          <td class="td-debt-rate"><%= loan.rate %></td>
+          <td class="td-debt-bank-card-num"><%= loan.bank_card_num %></td>
+          <td class="td-debt-filing-date"><%= chinese_date_format loan.filing_date %></td>
+          <% if loan.is_invested %>
+            <td class="td-debt-investor">
+              <%= loan.investor %>
+            </td>
+            <td class="td-debt-repay" >
+              <div class="btn btn-success">还款</div>
+            </td>
+          <% else %>
+            <td class="td-debt-investor"> </td>
+            <td class="td-debt-repay" > <%= link_to '还款', loan_path(loan.id) %> </td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>

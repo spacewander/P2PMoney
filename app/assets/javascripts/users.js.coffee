@@ -1,27 +1,32 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-$(document).ready ->
+ready = ->
   [controller, action] = Webpath()
+  console.log controller
+  console.log action
   if controller == "users-controller"
     switch action
       when 'new-action', 'create-action'
-        Users.checkRegisterForm()
+        FormHelper.checkRegisterForm()
       when 'edit-action', 'update-action'
-        Users.lockInput()
-        Users.bindUnlockAction()
-        Users.checkEditForm()
+        FormHelper.lockInput()
+        FormHelper.bindUnlockAction()
+        FormHelper.checkEditForm()
       when 'show-action'
-        Users.checkChargeForm()
+        FormHelper.checkChargeForm()
       else
       # do nothing
   # 为了追求复用，loans也用这个表单检查函数
   else if controller == "loans-controller"
     if action == 'new-action'
-      Users.checkLoanForm()
+      FormHelper.checkLoanForm()
     
-    
-Users =
+
+$(document).ready(ready)
+$(document).on('page:load', ready)
+
+FormHelper =
   lockInput: ->
     inputs = document.getElementsByTagName('input')
     for e in inputs

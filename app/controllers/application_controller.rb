@@ -31,4 +31,16 @@ class ApplicationController < ActionController::Base
     return redirect_to user_path(id)
   end
 
+  def get_rate_from_interval(rates, endtime, start)
+    # 以30天作为一个月
+    interval = ((endtime - start) / 30).to_i + 1
+    rates.sort! {|x, y| x[:months] <=> y[:months]}
+    res = 0.00
+    rates.each do |rate|
+      res = rate[:interest_rate]
+      break if rate[:months] > interval
+    end
+    res
+  end
+
 end

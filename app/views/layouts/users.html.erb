@@ -7,7 +7,7 @@
       <ul class="node" id="first-node">
         <li class="node-name">我的账户</li>
         <li class="item">
-          <%= link_to '个人信息', edit_user_path, :class => 'none' %>
+          <%= link_to '个人信息', edit_user_path(@user), :class => 'none' %>
         </li>
         <li class="item">
           <%= link_to '账户余额', @user, :class => 'none' %>

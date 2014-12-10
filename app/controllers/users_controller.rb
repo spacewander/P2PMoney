@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :set_user_with_params, only: [:show, :edit, :update]
-  before_action :set_user_with_session, only: [:charge]
+  before_action :set_user_with_session, only: [:charge, :debt]
   before_filter :is_hoster, only: [:edit, :show, :update]
 
   layout 'users'
@@ -36,6 +36,18 @@ class UsersController < ApplicationController
       end
     end
 
+  end
+
+  def debt
+    @loans = @user.loans.where(is_repay: false)
+    @rates = []
+    Rate.all.each do |rate|
+      @rates.push(interest_rate: rate.interest_rate, months: rate.months)
+    end
+    @loans.each do |loan|
+      loan.rate = get_rate_from_interval(@rates, loan.repay_time, loan.loan_time)
+    end
+    render
   end
 
   def new

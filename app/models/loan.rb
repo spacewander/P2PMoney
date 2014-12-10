@@ -10,4 +10,12 @@ class Loan < ActiveRecord::Base
   validates :amount, numericality: {  greater_than: 0 }
   validates :loan_time, date: { after: Proc.new { Time.now }, message: '借款时间不对 ' }
   validates :repay_time, date: { after: :loan_time, message: '还款时间不对 ' }
+
+  attr_accessor :rate
+
+  def investor
+    return nil unless is_invested
+    return loan.investment.user.username
+  end
+
 end

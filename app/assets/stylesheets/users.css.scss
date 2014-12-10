@@ -150,3 +150,21 @@ $item-blue:#00ccff;
         margin-left: 17%;
     }
 }
+
+// users#debt
+.user-debt {
+    margin-top: -10px;
+
+    & > h2 {
+        margin-left: 15%;
+        margin-bottom: 20px;
+    }
+}
+
+#user-debt-panel {
+    margin-left: 5%;
+}
+
+#user-debt-tbody {
+    font-size: 0.8em;
+}
