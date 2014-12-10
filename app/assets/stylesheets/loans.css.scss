@@ -1,3 +1,37 @@
 // Place all the styles related to the Loans controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// loans#new
+.new-loan-container {
+    background-color: white;
+    margin: 0 0;
+    min-height: 640px;
+    padding-top: 30px;
+}
+
+.new-loan-form {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+
+    & input[type=submit] {
+        margin-top: 10px;
+        width: 50%;
+        float: left;
+        font-size: 1.7em;
+        font-weight: bold;
+    }
+
+    & .go-back-btn {
+        margin-top: 10px;
+        margin-left: 20%;
+        width: 25%;
+    }
+    & .go-back-btn  > a {
+        font-weight: bold;
+        color: white;
+        font-size: 1.7em;
+    }
+}
+

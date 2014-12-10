@@ -25,6 +25,10 @@ ActiveRecord::Schema.define(version: 20141208023342) do
   create_table "loans", force: true do |t|
     t.integer  "user_id",                                   null: false
     t.integer  "investment_id"
+    t.string   "real_name",                                 null: false
+    t.integer  "age",                                       null: false
+    t.string   "company",                                   null: false
+    t.string   "telephone",                                 null: false
     t.decimal  "amount",           precision: 12, scale: 2
     t.date     "loan_time",                                 null: false
     t.date     "repay_time",                                null: false

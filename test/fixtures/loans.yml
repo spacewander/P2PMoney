@@ -3,10 +3,14 @@
 one:
   user_id: 1
   investment_id: 1
+  real_name: ABC
+  age: 20
+  company: ABC制造公司
+  telephone: 123456
   amount: 
   loan_time: 2014-12-08
   repay_time: 2014-12-08
-  bank_card_num: MyString
+  bank_card_num: 12345
   filing_date: 2014-12-08
   is_invested: false
   is_repay: false
@@ -15,10 +19,14 @@ one:
 two:
   user_id: 1
   investment_id: 1
+  real_name: ABC
+  age: 20
+  company: ABC制造公司
+  telephone: 123456
   amount: 
   loan_time: 2014-12-08
   repay_time: 2014-12-08
-  bank_card_num: MyString
+  bank_card_num: 12345
   filing_date: 2014-12-08
   is_invested: false
   is_repay: false

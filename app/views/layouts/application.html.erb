@@ -21,7 +21,7 @@
 <div class="nav_header">
 <div class="container-fluid">
   <li class="nav_button col-xs-3">
-    <% if @user && session[:id] == @user.id %>
+    <% if @user && session[:id] != nil %>
     <%= link_to '首页', user_path(@user), :class => 'nav-link' %>
     <% else %>
     <a href="/" class="nav-link">首页</a>

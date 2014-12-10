@@ -1,0 +1,34 @@
+<%= bootstrap_form_for(@loan, :layout => :horizontal) do |f| %>
+  <div class="field">
+    <%= f.text_field :real_name, :size => 12, :label => '真实姓名', :value => @user.real_name, :readonly => true %>
+  </div>
+  <div class="field">
+    <%= f.number_field :age, :label => '年龄', :min => 1 %>
+  </div>
+  <div class="field">
+    <%= f.text_field :company, :size => 30, :label => '工作单位' %>
+  </div>
+  <div class="field">
+    <%= f.text_field :telephone, :size => 12, :label => '联系方式', :value => @user.telephone, :readonly => true %>
+  </div>
+  <div class="field">
+    <%= f.number_field :amount, :label => '借款金额', :min => 1 %>
+  </div>
+  <div class="field">
+    <%= f.date_field :loan_time, :label => '借款时间'%>
+  </div>
+  <div class="field">
+    <%= f.date_field :repay_time, :label => '还款时间' %>
+  </div>
+  <div class="field">
+    <%= f.text_field :bank_card_num, :size => 15, :label => '银行卡号' %>
+  </div>
+  <div class="actions">
+    <div class="col-sm-offset-2">
+      <%= f.submit '立即预约' %>
+      <div class="btn btn-primary go-back-btn">
+        <%= link_to '取消', @user %>
+      </div>
+    </div>
+  </div>
+<% end %>

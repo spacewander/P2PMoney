@@ -13,6 +13,11 @@ $(document).ready ->
         Users.checkChargeForm()
       else
       # do nothing
+  # 为了追求复用，loans也用这个表单检查函数
+  else if controller == "loans-controller"
+    if action == 'new-action'
+      Users.checkLoanForm()
+    
     
 Users =
   checkRegisterForm: ->
@@ -34,7 +39,15 @@ Users =
   checkChargeForm: ->
     @bindPasswordChecker()
     @bindBankCardNumChecker()
-    @bindAmoutChecher()
+    @bindAmountChecker()
+
+  checkLoanForm: ->
+    @bindNullRegisterChecker('loan_company')
+    @bindNullRegisterChecker('loan_age')
+    @bindNullRegisterChecker('loan_loan_time')
+    @bindNullRegisterChecker('loan_repay_time')
+    @bindLoanBankCardNumChecker()
+    @bindLoanAmountChecker()
 
   editHelpBlock: (labelName, msg) ->
     return if labelName == ''
@@ -116,10 +129,23 @@ Users =
         event.preventDefault()
         @editHelpBlock('bank_card_num', '银行卡号码不对')
 
-  bindAmoutChecher: ->
+  bindAmountChecker: ->
     $('form').submit (event) =>
       amount = $("#amount").val().trim()
       if amount == '' or amount == '0'
         event.preventDefault()
         @editHelpBlock('amount', '金额不对')
 
+  bindLoanBankCardNumChecker: ->
+    $('form').submit (event) =>
+      bank_card_num = $("#loan_bank_card_num").val().trim()
+      if !(bank_card_num.match /^\d+$/)
+        event.preventDefault()
+        @editHelpBlock('loan_bank_card_num', '银行卡号码不对')
+
+  bindLoanAmountChecker: ->
+    $('form').submit (event) =>
+      amount = $("#loan_amount").val().trim()
+      if amount == '' or amount == '0'
+        event.preventDefault()
+        @editHelpBlock('loan_amount', '金额不对')
