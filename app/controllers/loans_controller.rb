@@ -4,6 +4,88 @@ class LoansController < ApplicationController
 
   authorize_resource only: [:show, :repay]
 
+  PAGE_SIZE = 5
+
+  def index
+    page = params[:page].to_i
+    if page.nil? || page <= 1
+      page = 1
+    end
+
+    case (interval = params[:interval].to_i)
+      when 1
+        lower_interval = 0
+        upper_interval = 30
+      when 2
+        lower_interval = 30
+        upper_interval = 90
+      when 3
+        lower_interval = 90
+        upper_interval = 180
+      when 4
+        lower_interval = 180
+        upper_interval = 360
+      when 5
+        lower_interval = 360
+        upper_interval = 2 ** (0.size * 8 - 2) - 1
+      else
+        lower_interval = 0
+        upper_interval = 2 ** (0.size * 8 - 2) - 1
+    end
+
+    case (amount = params[:amount].to_i)
+      when 1
+        lower_amount = 0
+        upper_amount = 1000
+      when 2
+        lower_amount = 1000
+        upper_amount = 5000
+      when 3
+        lower_amount = 5000
+        upper_amount = 10000
+      when 4
+        lower_amount = 10000
+        upper_amount = 2 ** (0.size * 8 - 2) - 1
+      else
+        lower_amount = 0
+        upper_amount = 2 ** (0.size * 8 - 2) - 1
+    end
+
+    if interval
+      @interval_checked = interval
+    else
+      @interval_checked = 0
+    end
+    if amount
+      @amount_checked = amount
+    else
+      @amount_checked = 0
+    end
+
+    @loans = Loan.all.where("is_invested = ?", false)
+                      .order('id DESC')
+                      .page(page).per_page(PAGE_SIZE)
+
+    @rates = []
+    Rate.all.each do |rate|
+      @rates.push(interest_rate: rate.interest_rate, months: rate.months)
+    end
+    @loans.each do |loan|
+      loan.rate = get_rate_from_interval(@rates, loan.repay_time, loan.loan_time)
+    end
+    respond_to do |format|
+      format.html { render }
+      format.json { 
+        render :json => {
+          :current_page => @loans.current_page,
+          :per_page => @loans.per_page,
+          :total_entries => @loans.total_entries,
+          :entries => @loans 
+        }
+      }
+    end
+  end
+
   def new
     @loan = Loan.new
   end

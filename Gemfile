@@ -49,3 +49,5 @@ gem 'cancancan'
 
 # for date validates
 gem 'date_validator', '~> 0.7.1'
+
+gem 'will_paginate-bootstrap'

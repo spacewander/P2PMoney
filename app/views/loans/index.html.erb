@@ -1,0 +1,108 @@
+<% content_for(:main) do %>
+<div class="index-loan-container">
+<div class="loan-condition">
+  <div class="hidden">
+    <div id="amount_checked"><%= @amount_checked %></div>
+    <div id="interval_checked"><%= @interval_checked %></div>
+  </div>
+  <div id="amount-condition" class="condition">
+    <span class="amount-group">
+      <input checked="checked" id="amount_unlimited" name="amount" type="radio" value="0">不设限制</input>
+    </span>
+    <span class="amount-group">
+      <input  id="amount_1000" name="amount" type="radio" value="1">小于1000</input>
+    </span>
+    <span class="amount-group">
+      <input  id="amount_5000" name="amount" type="radio" value="2">小于5000</input>
+    </span>
+    <span class="amount-group">
+      <input  id="amount_10000" name="amount" type="radio" value="3">小于10000</input>
+    </span>
+    <span class="amount-group">
+      <input id="amount_gt_10000" name="amount" type="radio" value="4">不小于10000</input>
+    </span>
+  </div>
+  <div id="interval-condition" class="condition">
+    <span class="interval-group">
+      <input checked="checked" id="interval_unlimited" name="interval" type="radio" value="0">不设限制</input>
+    </span>
+    <span class="interval-group">
+      <input  id="interval_1m" name="interval" type="radio" value="1">一个月内</input>
+    </span>
+    <span class="interval-group">
+      <input  id="interval_3m" name="interval" type="radio" value="2">三个月内</input>
+    </span>
+    <span class="interval-group">
+      <input  id="interval_6m" name="interval" type="radio" value="3">六个月内</input>
+    </span>
+    <span class="interval-group">
+      <input id="interval_1y" name="interval" type="radio" value="4">一年内</input>
+    </span>
+    <span class="interval-group">
+      <input id="interval_gt_1y" name="interval" type="radio" value="5">一年以上</input>
+    </span>
+  </div>
+</div>
+<hr />
+<div class="table-responsive" id="loan-table">
+  <table id="loan-index" class="table table-hover table-strip">
+    <thead>
+      <tr>
+        <th>借款人</th>
+        <th >年龄</th>
+        <th >工作单位</th>
+        <th >联系方式</th>
+        <th >金额</th>
+        <th>利率</th>
+        <th>借款时间</th>
+        <th>还款时间</th>
+        <th>银行卡号</th>
+        <th>发布日期</th>
+        <th>投资</th>
+      </tr>
+    </thead>
+
+    <tbody class="loan-tbody">
+      <% @loans.each do |loan| %>
+        <tr>
+        <td class="name">
+          <%= loan.real_name %>
+        </td>
+        <td class="age">
+          <%= loan.age %>
+        </td>
+        <td class="company">
+          <%= loan.company %>
+        </td>
+        <td class="telephone">
+          <%= loan.telephone %>
+        </td>
+        <td class="amount">
+          <%= loan.amount %>
+        </td>
+        <td class="rate">
+          <%= loan.rate %>
+        </td>
+        <td class="loan-time">
+          <%= chinese_date_format loan.loan_time %>
+        </td>
+        <td class="repay-time">
+          <%= chinese_date_format loan.repay_time %>
+        </td>
+        <td class="bank-card-num">
+          <%= loan.bank_card_num %>
+        </td>
+        <td class="filing-date">
+          <%= chinese_date_format loan.filing_date %>
+        </td>
+        <td class="invest"><div class="btn btn-default">投资</div></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div id="loan-pagination">
+  <%= will_paginate @loans, renderer: BootstrapPagination::Rails %>
+</div>
+</div>
+<% end %>

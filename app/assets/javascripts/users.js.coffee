@@ -3,8 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 ready = ->
   [controller, action] = Webpath()
-  console.log controller
-  console.log action
   if controller == "users-controller"
     switch action
       when 'new-action', 'create-action'
