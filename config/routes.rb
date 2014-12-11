@@ -61,7 +61,7 @@ Rails.application.routes.draw do
     get 'logout' => :logout
   end
   resources :loans
-  resources :investment
+  resources :investments
   resources :users do
     collection do
       post 'charge' => :charge

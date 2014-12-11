@@ -10,16 +10,16 @@
       <input checked="checked" id="amount_unlimited" name="amount" type="radio" value="0">不设限制</input>
     </span>
     <span class="amount-group">
-      <input  id="amount_1000" name="amount" type="radio" value="1">小于1000</input>
+      <input  id="amount_1000" name="amount" type="radio" value="1">0 - 1000</input>
     </span>
     <span class="amount-group">
-      <input  id="amount_5000" name="amount" type="radio" value="2">小于5000</input>
+      <input  id="amount_5000" name="amount" type="radio" value="2">1000 - 5000</input>
     </span>
     <span class="amount-group">
-      <input  id="amount_10000" name="amount" type="radio" value="3">小于10000</input>
+      <input  id="amount_10000" name="amount" type="radio" value="3">5000 - 10000</input>
     </span>
     <span class="amount-group">
-      <input id="amount_gt_10000" name="amount" type="radio" value="4">不小于10000</input>
+      <input id="amount_gt_10000" name="amount" type="radio" value="4"> &gt= 10000</input>
     </span>
   </div>
   <div id="interval-condition" class="condition">
@@ -39,7 +39,7 @@
       <input id="interval_1y" name="interval" type="radio" value="4">一年内</input>
     </span>
     <span class="interval-group">
-      <input id="interval_gt_1y" name="interval" type="radio" value="5">一年以上</input>
+      <input id="interval_gt_1y" name="interval" type="radio" value="5">三年以内</input>
     </span>
   </div>
 </div>
@@ -95,7 +95,11 @@
         <td class="filing-date">
           <%= chinese_date_format loan.filing_date %>
         </td>
-        <td class="invest"><div class="btn btn-default">投资</div></td>
+        <td class="invest">
+          <div class="btn btn-default">
+            <%= link_to '投资', {controller: 'investments', action: 'new', id: loan.id}, class: 'none' %>
+          </div>
+        </td>
         </tr>
       <% end %>
     </tbody>

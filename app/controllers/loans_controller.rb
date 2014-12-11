@@ -14,23 +14,18 @@ class LoansController < ApplicationController
 
     case (interval = params[:interval].to_i)
       when 1
-        lower_interval = 0
-        upper_interval = 30
+        final_date = 1.month.from_now
       when 2
-        lower_interval = 30
-        upper_interval = 90
+        final_date = 3.month.from_now
       when 3
-        lower_interval = 90
-        upper_interval = 180
+        final_date = 6.month.from_now
       when 4
-        lower_interval = 180
-        upper_interval = 360
+        final_date = 1.year.from_now
       when 5
-        lower_interval = 360
-        upper_interval = 2 ** (0.size * 8 - 2) - 1
+        final_date = 3.year.from_now
       else
-        lower_interval = 0
-        upper_interval = 2 ** (0.size * 8 - 2) - 1
+        # no need to use final_date
+        final_date = nil
     end
 
     case (amount = params[:amount].to_i)
@@ -62,9 +57,16 @@ class LoansController < ApplicationController
       @amount_checked = 0
     end
 
-    @loans = Loan.all.where("is_invested = ?", false)
-                      .order('id DESC')
-                      .page(page).per_page(PAGE_SIZE)
+    if final_date
+      @loans = Loan.all.where("is_invested = ? AND repay_time <= ? AND amount > ? AND amount <= ?",
+                              false, final_date, lower_amount, upper_amount)
+                       .order('id DESC') .page(page).per_page(PAGE_SIZE)
+    else
+      @loans = Loan.all.where("is_invested = ? AND amount > ? AND amount <= ?",
+                              false, lower_amount, upper_amount)
+                       .order('id DESC')
+                       .page(page).per_page(PAGE_SIZE)
+    end
 
     @rates = []
     Rate.all.each do |rate|
