@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
   validates :id_card_num, format: { with: /\A4401/,
     message: "身份证号码不正确 " }
   validates :telephone, format: { with: /\A\d+\z/, message: '电话号码不合法 ' }
+  validates :balance, numericality: { greater_than_or_equal_to: 0, message: '余额不足 ' }
 
   def self.authenticate(name, password)
     if @user = find_by_username(name)

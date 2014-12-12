@@ -1,19 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  username: MyString
+  id: 1
+  username: 桃太郎
   telephone: '123'
   email: 123@gmail.com
   real_name: 桃太郎
   id_card_num: 440107
   password_hash: <%= BCrypt::Password.create("123") %>
-  balance: 
+  balance: 10000
 
 two:
-  username: YourString
+  id: 2
+  username: Loli
   telephone: 456
   email: ga@scut.edu.cn
   real_name: Loli
   id_card_num: 440105
   password_hash: <%= BCrypt::Password.create("a") %>
-  balance: 
+  balance: 20000

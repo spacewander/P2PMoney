@@ -1,0 +1,38 @@
+<% @title = 'clockOut - 借款信息' %>
+
+<div class="user-invest">
+  <h2>我的投资</h2>
+  <% if @investments && @investments.length != 0 %>
+  <div class="table-responsive" id="user-invest-panel">
+    <table id="user-invest-table" class="table table-hover table-condensed table-striped">
+      <thead id="user-invest-thead">
+        <tr>
+          <th class="invest-amount">投资金额</th>
+          <th class="invest-loan-time">借款时间</th>
+          <th class="invest-repay-time">还款时间</th>
+          <th class="invest-rate">利率</th>
+          <th class="invest-invest-date">投资日期</th>
+          <th class="invest-debtor">债务人</th>
+        </tr>
+      </thead>
+      <tbody id="user-invest-tbody">
+        <% @investments.each do |investment| %>
+        <tr>
+          <td class="invest-amount">
+            <%= investment.loan.amount %>
+          </td>
+          <td class="invest-investment-time">
+            <%= chinese_date_format investment.loan.loan_time %>
+          </td>
+          <td class="invest-repay-time">
+            <%= chinese_date_format investment.loan.repay_time %>
+          </td>
+          <td class="invest-rate"><%= investment.loan.rate %></td>
+          <td class="invest-invest-date"><%= chinese_date_format investment.invest_date %></td>
+          <td class="invest-debtor"><%= investment.loan.real_name %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>

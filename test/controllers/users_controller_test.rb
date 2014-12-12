@@ -22,7 +22,14 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should let user login" do
-    assert_not_equal nil, User.authenticate('MyString', '123')
+    assert_not_equal nil, User.authenticate(users(:one).username, '123')
   end
 
+  test "should don't let user login because of password" do
+    assert_equal nil, User.authenticate(users(:one).username, '1234')
+  end
+
+  test "should don't let user login because of username" do
+    assert_equal nil, User.authenticate('username', '123')
+  end
 end

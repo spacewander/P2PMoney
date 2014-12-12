@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :set_user_with_params, only: [:show, :edit, :update]
-  before_action :set_user_with_session, only: [:charge, :debt]
+  before_action :set_user_with_session, only: [:charge, :debt, :invest]
   before_filter :is_hoster, only: [:edit, :show, :update]
 
   layout 'users'
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
         if @user.save
           format.html {redirect_to @user }
         else
-          format.html { redirect_to @user, :notice => @error }
+          format.html { redirect_to @user, :notice => @user.errors }
         end
       end
     end
@@ -39,12 +39,25 @@ class UsersController < ApplicationController
   end
 
   def debt
-    @loans = @user.loans.where(is_repay: false)
+    @loans = @user.loans.where(is_invested: false)
     @rates = []
     Rate.all.each do |rate|
       @rates.push(interest_rate: rate.interest_rate, months: rate.months)
     end
     @loans.each do |loan|
+      loan.rate = get_rate_from_interval(@rates, loan.repay_time, loan.loan_time)
+    end
+    render
+  end
+
+  def invest
+    @investments = @user.investments.where(is_repay: false)
+    @rates = []
+    Rate.all.each do |rate|
+      @rates.push(interest_rate: rate.interest_rate, months: rate.months)
+    end
+    @investments.each do |investment|
+      loan = investment.loan
       loan.rate = get_rate_from_interval(@rates, loan.repay_time, loan.loan_time)
     end
     render
