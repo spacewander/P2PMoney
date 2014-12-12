@@ -22,7 +22,11 @@ ready = ->
         FormHelper.checkLoanForm()
       when 'show-action', 'repay-action'
         FormHelper.checkRepayForm()
-    
+  else if controller == 'investments-controller'
+    switch action
+      when 'new-action', 'create-action'
+        FormHelper.checkInvestForm()
+        
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
@@ -85,6 +89,9 @@ FormHelper =
     @bindNullRegisterChecker('password')
     @bindBankCardNumChecker()
 
+  checkInvestForm: ->
+    @bindNullRegisterChecker('password')
+
   editHelpBlock: (labelName, msg) ->
     return if labelName == ''
     # 使用CSS3的同级选择器
@@ -104,7 +111,7 @@ FormHelper =
     $('form').submit (event) =>
       password = $('input[name="user[password]"]').val().trim()
       if password == ''
-        event.preventDefault()
+        event.preventDefZault()
         @editHelpBlock('user_password', '不能为空！')
 
       password_confirmation = $('#user_password_confirmation').val().trim()

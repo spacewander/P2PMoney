@@ -1,3 +1,58 @@
 // Place all the styles related to the Investments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// investments#new
+.new-investment-container {
+    background-color: white;
+    margin: 0 0;
+    min-height: 640px;
+    padding-top: 30px;
+    font-size: 20px;
+}
+
+.new-investment {
+    margin-top: 5px;
+    text-align: center;
+
+    & .next-step {
+        margin-top: 40px;
+        width: 15%;
+        font-size: 20px;
+    }
+}
+
+#new-investment-table {
+    & tr {
+        line-height: 100px;
+
+        & > td {
+            border: rgb(25, 51, 232) solid 1px;
+        }
+    }
+}
+
+.new-investment-form {
+    margin: 0 25%;
+    margin-top: 100px;
+
+    & .investor-balance {
+        text-align: left;
+        font-weight: bold;
+        padding-left: 8px;
+        margin-bottom: 20px;
+
+        & > .remain-balance {
+            margin-left: 70%;
+        }
+    }
+
+    & .form-horizontal .control-label {
+        padding-top: 0 !important;
+    }
+    & input[type=submit] {
+        width: 20%;
+        font-size: 20px;
+        margin-top: 50px;
+    }
+}

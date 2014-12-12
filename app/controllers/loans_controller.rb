@@ -139,14 +139,6 @@ class LoansController < ApplicationController
     end
   end
 
-  def has_login
-    begin
-      @user = User.find(get_session_id)
-    rescue ActiveRecord::RecordNotFound
-      return forbidden
-    end
-  end
-
   def loan_params
     params.require(:loan).permit(:id, :loan_time, :repay_time,
                                 :telephone, :real_name, :company, :age,

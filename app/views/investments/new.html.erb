@@ -1,0 +1,40 @@
+<% content_for(:main) do %>
+<div class="new-investment-container">
+<div class="new-investment">
+  <table class="container" id="new-investment-table">
+    <tbody>
+    <tr class="row">
+      <td class="col-sm-2">借方</td>
+      <td class="col-sm-4"><%= @debtor.username %></td>
+      <td class="col-sm-2">贷方</td>
+      <td class="col-sm-4"><%= @investor.username %></td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-2">借款时间</td>
+      <td class="col-sm-4"><%= chinese_date_format @loan.loan_time %></td>
+      <td class="col-sm-2">还款时间</td>
+      <td class="col-sm-4"><%= chinese_date_format @loan.repay_time %></td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-2">金额</td>
+      <td class="col-sm-4"><%= @loan.amount %></td>
+      <td class="col-sm-2">利率</td>
+      <td class="col-sm-4"><%= @loan.rate %></td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="next-step btn btn-default">下一步</div>
+  <div class="new-investment-form hidden">
+    <%= bootstrap_form_tag url: "/investments/create", layout: :horizontal do |f| %>
+      <div class="investor-balance">
+        <span class="remain">您的余额为</span>
+        <span class="remain-balance"><%= @investor.balance %></span>
+      </div>
+      <%= f.password_field :password, label: '您的密码' %>
+      <%= f.submit "确认" %>
+    <% end %>
+  </div>
+</div>
+</div>
+<% end %>
+

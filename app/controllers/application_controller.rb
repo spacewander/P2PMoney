@@ -12,6 +12,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def has_login
+    begin
+      @user = User.find(get_session_id)
+    rescue ActiveRecord::RecordNotFound
+      return forbidden
+    end
+  end
+
   def has_session_id
     session[:id] != nil
   end
@@ -22,6 +30,14 @@ class ApplicationController < ActionController::Base
 
   def set_session_id(id)
     session[:id] = id
+  end
+
+  def set_current_loan_id(id)
+    session[:loan_id] = id
+  end
+
+  def get_current_loan_id
+    session[:loan_id]
   end
 
   def not_found
