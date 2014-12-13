@@ -8,6 +8,7 @@ ready = ->
       when 'index-action'
         Loans.checkSpecifitRadio()
         Loans.bindFilterChange()
+        Loans.bindClickInvestBtn()
     
 
 $(document).ready(ready)
@@ -37,3 +38,7 @@ Loans =
   pageReloadWithFilter: (amount, interval) ->
     window.location.search =
       "?page=1&amount=#{amount}&interval=#{interval}"
+
+  bindClickInvestBtn: ->
+    $('.invest > .btn').click ->
+      this.firstElementChild.click()
