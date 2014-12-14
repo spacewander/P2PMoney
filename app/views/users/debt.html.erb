@@ -37,11 +37,11 @@
               <%= loan.investor %>
             </td>
             <td class="td-debt-repay" >
-              <div class="btn btn-primary">还款</div>
+              <div class="debt btn btn-primary"><%= link_to '还款', loan_path(loan.id), class: 'none' %> </div>
             </td>
           <% else %>
             <td class="td-debt-investor"> </td>
-            <td class="td-debt-repay" > <%= link_to '还款', loan_path(loan.id) %> </td>
+            <td class="td-debt-repay" > </td>
           <% end %>
         </tr>
         <% end %>

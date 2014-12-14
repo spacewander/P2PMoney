@@ -121,7 +121,32 @@ class LoansController < ApplicationController
   end
 
   def repay
-    
+    return forbidden if params[:bank_card_num].nil? || params[:password].nil?
+    return forbidden if @loan.is_repay || !@loan.is_invested || @loan.user.id != @user.id
+    @investment = Investment.find_by_loan_id(@loan.id)
+    @investor = @investment.user
+    @debtor = @user
+
+    # 对借款人和贷款人是同一个人这种情况进行特殊处理
+    if @loan.user.id != @investor.id
+      @debtor.balance -= @loan.amount
+      @investor.balance += @loan.amount
+    end
+
+    if @debtor.save
+      @loan.is_repay = true
+      @investment.is_repay = true
+      @investor.save
+      @loan.save
+      @investment.save
+      respond_to do |format|
+        format.html { redirect_to controller: 'users', action: 'debt' }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to loan_path, :notice => "余额不足"}
+      end
+    end
   end
 
   private

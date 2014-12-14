@@ -19,3 +19,13 @@ two:
   id_card_num: 440105
   password_hash: <%= BCrypt::Password.create("a") %>
   balance: 20000
+
+three:
+  id: 3
+  username: Saber
+  telephone: 456
+  email: my@163.com
+  real_name: Saber
+  id_card_num: 440105
+  password_hash: <%= BCrypt::Password.create("a") %>
+  balance: 20000

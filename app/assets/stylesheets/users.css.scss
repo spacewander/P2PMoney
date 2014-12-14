@@ -92,8 +92,9 @@ $item-blue:#00ccff;
 }
 
 // users#show
+// .user-container also used in other page like users#debt and users#invest
 .user-container {
-    height: 600px;
+    min-height: 600px;
     background-color: white;
     padding: 60px 0;
     margin-top: 10px;
@@ -151,8 +152,8 @@ $item-blue:#00ccff;
     }
 }
 
-// users#debt
-.user-debt {
+// users#debt and users#invest
+.user-debt, .user-invest {
     margin-top: -10px;
 
     & > h2 {
@@ -161,10 +162,10 @@ $item-blue:#00ccff;
     }
 }
 
-#user-debt-panel {
+#user-debt-panel, #user-invest-panel {
     margin-left: 5%;
 }
 
-#user-debt-tbody {
+#user-debt-tbody, #user-invest-tbody {
     font-size: 0.8em;
 }

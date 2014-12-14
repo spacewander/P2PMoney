@@ -60,7 +60,13 @@ Rails.application.routes.draw do
     post 'login' => :create
     get 'logout' => :logout
   end
-  resources :loans
+
+  resources :loans do
+    member do
+      post 'repay'
+    end
+  end
+
   resources :investments
   resources :users do
     collection do

@@ -12,10 +12,7 @@ class Loan < ActiveRecord::Base
   validates :repay_time, date: { after: :loan_time, message: '还款时间不对 ' }
 
   attr_accessor :rate
+  attr_accessor :investor
 
-  def investor
-    return nil unless is_invested
-    return loan.investment.user.username
-  end
 
 end

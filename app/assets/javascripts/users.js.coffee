@@ -13,6 +13,8 @@ ready = ->
         FormHelper.checkEditForm()
       when 'show-action'
         FormHelper.checkChargeForm()
+      when 'debt-action'
+        Users.bindClickRepayBtn()
       else
       # do nothing
   # 为了追求复用，loans也用这个表单检查函数
@@ -192,3 +194,10 @@ FormHelper =
       if amount == '' or amount == '0'
         event.preventDefault()
         @editHelpBlock('loan_amount', '金额不对')
+
+
+Users =
+  bindClickRepayBtn: ->
+    $('.debt.btn').click ->
+      this.firstElementChild.click()
+    

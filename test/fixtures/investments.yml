@@ -2,12 +2,18 @@
 
 one:
   user_id: 1
-  loan_id: 1
+  loan_id: 3
   invest_date: 2014-12-08
   is_repay: false
 
 two:
-  user_id: 1
-  loan_id: 1
+  user_id: 2
+  loan_id: 4
+  invest_date: 2014-12-08
+  is_repay: false
+
+three:
+  user_id: 2
+  loan_id: 5
   invest_date: 2014-12-08
   is_repay: false

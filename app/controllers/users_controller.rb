@@ -39,12 +39,13 @@ class UsersController < ApplicationController
   end
 
   def debt
-    @loans = @user.loans.where(is_invested: false)
+    @loans = @user.loans.where(is_repay: false)
     @rates = []
     Rate.all.each do |rate|
       @rates.push(interest_rate: rate.interest_rate, months: rate.months)
     end
     @loans.each do |loan|
+      loan.investor = loan.investment.user.username if loan.is_invested
       loan.rate = get_rate_from_interval(@rates, loan.repay_time, loan.loan_time)
     end
     render
