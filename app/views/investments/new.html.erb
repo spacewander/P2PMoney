@@ -28,7 +28,7 @@
     <%= bootstrap_form_tag url: "/investments", layout: :horizontal do |f| %>
       <div class="investor-balance">
         <span class="remain">您的余额</span>
-        <span class="remain-balance"><%= @investor.balance %></span>
+        <span class="remain-balance"><%= number_with_precision @investor.balance, precision: 2 %></span>
       </div>
       <%= f.password_field :password, label: '您的密码' %>
       <%= f.submit "确认" %>

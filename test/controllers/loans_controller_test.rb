@@ -17,7 +17,7 @@ class LoansControllerTest < ActionController::TestCase
       User.find(assigns(:investor).id).balance.to_i
     assert_equal (15000 - interest).to_i, 
       User.find(assigns(:debtor).id).balance.to_i
-    assert_redirected_to controller: 'users', action: 'debt'  
+    assert_redirected_to user_path(session[:id])
   end
 
   test "还款失败，因为余额不足" do

@@ -40,6 +40,11 @@ class ApplicationController < ActionController::Base
     session[:loan_id]
   end
 
+  def destroy_all_sessions
+    session[:id] = nil
+    session[:loan_id] = nil
+  end
+
   def not_found
     return redirect_to :status => 404
   end

@@ -123,7 +123,7 @@ class LoansController < ApplicationController
   end
 
   def repay
-    return forbidden if params[:bank_card_num].nil? || params[:password].nil?
+    #return forbidden if params[:bank_card_num].nil? || params[:password].nil?
     return forbidden if @loan.is_repay || !@loan.is_invested || @loan.user.id != @user.id
     @investment = Investment.find_by_loan_id(@loan.id)
     @investor = @investment.user
@@ -151,7 +151,7 @@ class LoansController < ApplicationController
       @loan.save
       @investment.save
       respond_to do |format|
-        format.html { redirect_to controller: 'users', action: 'debt' }
+        format.html { redirect_to user_path(@debtor)}
       end
     else
       respond_to do |format|

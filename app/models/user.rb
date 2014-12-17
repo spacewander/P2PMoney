@@ -16,13 +16,10 @@ class User < ActiveRecord::Base
 
   validates :password, :confirmation => { message: '跟密码不匹配啊 ' }
   validate :password_given
-  attr_reader :password
   attr_accessor :password_confirmation
 
   validates :email, format: { with: /\A\w+@\w+(?:\.[a-zA-Z]+)+\z/, 
     message: "邮箱地址不正确 "} 
-  validates :id_card_num, format: { with: /\A4401/,
-    message: "身份证号码不正确 " }
   validates :telephone, format: { with: /\A\d+\z/, message: '电话号码不合法 ' }
   validates :balance, numericality: { greater_than_or_equal_to: 0, message: '余额不足 ' }
 

@@ -35,8 +35,8 @@
   </div>
   <div class="show-loan-form">
     <%= bootstrap_form_tag url: "/loans/#{@loan.id}/repay", layout: :horizontal do |f| %>
-      <%= f.text_field :bank_card_num, label: '银行卡号' %>
-      <%= f.password_field :password, label: '银行卡密码' %>
+      <%#<%= f.text_field :bank_card_num, label: '银行卡号' %>
+      <%#<%= f.password_field :password, label: '银行卡密码' %>
       <%= f.submit "还款" %>
     <% end %>
   </div>

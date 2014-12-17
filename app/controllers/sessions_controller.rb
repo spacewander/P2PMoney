@@ -11,6 +11,11 @@ class SessionsController < ApplicationController
     render
   end
 
+  def logout
+    destroy_all_sessions
+    redirect_to login_url
+  end
+
   def create
     @user = User.authenticate(params[:name], params[:password])
     if @user

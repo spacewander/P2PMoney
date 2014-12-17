@@ -64,7 +64,6 @@ FormHelper =
     @bindPasswordRegisterChecker()
     @bindEmailRegisterChecker()
     @bindTelephoneRegisterChecker()
-    @bindIdCardNumRegisterChecker()
     @bindAcceptChecker()
 
   checkEditForm: ->
@@ -72,7 +71,6 @@ FormHelper =
     @bindNullRegisterChecker('user_real_name')
     @bindEmailRegisterChecker()
     @bindTelephoneRegisterChecker()
-    @bindIdCardNumRegisterChecker()
 
   checkChargeForm: ->
     @bindPasswordChecker()
@@ -147,13 +145,6 @@ FormHelper =
       if !telephone.match(/\d+/)
         event.preventDefault()
         @editHelpBlock('user_telephone', '号码不合法！')
-
-  bindIdCardNumRegisterChecker: ->
-    $('form').submit (event) =>
-      id_card_num = $('#user_id_card_num').val().trim()
-      if id_card_num.substring(0, 4) != '4401'
-        event.preventDefault()
-        @editHelpBlock('user_id_card_num', '号码不合法！')
 
   bindAcceptChecker: ->
     $('form').submit (event) ->
