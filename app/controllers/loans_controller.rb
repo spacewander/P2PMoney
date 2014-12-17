@@ -1,5 +1,5 @@
 class LoansController < ApplicationController
-  before_action :has_login, only: [:new, :create]
+  before_action :has_login, only: [:new, :create, :index]
   before_action :set_loan_with_params, only: [:show, :repay]
 
   authorize_resource only: [:show, :repay]
@@ -57,13 +57,15 @@ class LoansController < ApplicationController
       @amount_checked = 0
     end
 
+    user_id = @user.id.to_i
     if final_date
-      @loans = Loan.all.where("is_invested = ? AND repay_time <= ? AND amount > ? AND amount <= ?",
-                              false, final_date, lower_amount, upper_amount)
+      @loans = Loan.all.where("is_invested = ? AND repay_time <= ? AND amount > ? 
+                              AND amount <= ? AND user_id != ?",
+                              false, final_date, lower_amount, upper_amount, user_id)
                        .order('id DESC') .page(page).per_page(PAGE_SIZE)
     else
-      @loans = Loan.all.where("is_invested = ? AND amount > ? AND amount <= ?",
-                              false, lower_amount, upper_amount)
+      @loans = Loan.all.where("is_invested = ? AND amount > ? AND amount <= ? AND user_id != ?",
+                              false, lower_amount, upper_amount, user_id)
                        .order('id DESC')
                        .page(page).per_page(PAGE_SIZE)
     end
@@ -129,8 +131,17 @@ class LoansController < ApplicationController
 
     # 对借款人和贷款人是同一个人这种情况进行特殊处理
     if @loan.user.id != @investor.id
-      @debtor.balance -= @loan.amount
-      @investor.balance += @loan.amount
+      # 注意要收利息 利息 = 本金 × 利率 × 借贷时间（至少为30天） / 360 
+      @rates = []
+      Rate.all.each do |rate|
+        @rates.push(interest_rate: rate.interest_rate, months: rate.months)
+      end
+      @loan.rate = get_rate_from_interval(@rates, @loan.repay_time, @loan.loan_time)
+      loan_interval = (Time.now.to_date - @loan.loan_time).to_i
+      loan_interval = loan_interval >= 30 ? loan_interval : 30
+      interest = @loan.amount * @loan.rate / 100 * loan_interval / 360
+      @debtor.balance -= @loan.amount + interest
+      @investor.balance += @loan.amount + interest
     end
 
     if @debtor.save

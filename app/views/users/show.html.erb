@@ -7,7 +7,7 @@
   </div>
   <div class="description-item">
     <span class="key">账户余额 </span>
-    <span class="value"><%= @user.balance %></span>
+    <span class="value"><%= number_with_precision @user.balance, precision: 2 %></span>
   </div>
   <div class="show-user-form">
     <%= bootstrap_form_tag url: '/users/charge' do |f| %>
